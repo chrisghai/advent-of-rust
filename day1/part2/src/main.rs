@@ -1,6 +1,6 @@
 use regex::Regex;
-use std::{env, i32, format};
 use std::fs::read_to_string;
+use std::{env, format, i32};
 
 fn read_lines(filename: &str) -> Vec<String> {
     let mut result = Vec::new();
@@ -13,7 +13,8 @@ fn read_lines(filename: &str) -> Vec<String> {
 }
 
 fn get_number_from(line: String) -> i32 {
-    let li: String = line.clone()
+    let li: String = line
+        .clone()
         .replace("one", "o1e")
         .replace("two", "t2o")
         .replace("three", "t3e")
@@ -28,7 +29,8 @@ fn get_number_from(line: String) -> i32 {
     let matches: Vec<_> = re.find_iter(li.as_str()).map(|l| l.as_str()).collect();
     let n: usize = matches.len();
     let number: i32 = format!("{}{}", matches[0], matches[n - 1])
-        .parse::<i32>().unwrap();
+        .parse::<i32>()
+        .unwrap();
     return number;
 }
 
